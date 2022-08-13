@@ -1,0 +1,70 @@
+// git
+
+查看安裝的git版本號碼
+git --version
+
+
+觀察 user.name、user.email 這二項設定值
+git config --list
+
+更改設定值
+git config --global user.name "Chien"  //帳號
+git config --global user.email "wolfgang.chien@gmail.com"  // email
+
+
+建立 gitLab 資料夾
+切換到 gitLab 資料夾
+mkdir gitLab
+cd gitLab
+
+
+建立 Repository (數據庫)
+git init
+
+
+了解工作目錄的現況
+git status
+
+
+將檔案複製一份到暫存區
+git add *.txt(檔案)
+
+也可以用"."代表所有更動過的內容
+git add . 
+
+
+將檔案「認可」(合併)到數據庫
+git commit -m "create a shopping list"
+
+
+查看現有分支
+git branch
+
+建立名為 bbq 的新分支
+git branch bbq
+
+切換到名為 master 的分支
+git checkout master 
+
+
+觀察/比較/合併 branch (分支)
+
+
+git diff 要比對的分支名稱(在此以bbq為例)
+git diff bbq
+
+合併 master 與 bbq
+git merge --no-ff bbq
+
+
+可以看到雜湊值的log(方便復原到某次的git版本)
+git reflog
+
+顯示git歷程內容(和上面是類似用法)
+it log --pretty=format:"%h - %s" 
+
+還原成某一次的git版本
+git reset HEAD --hard
+git reset HEAD~2 --hard
+git reset 某次雜湊值 --hard
+
