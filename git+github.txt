@@ -68,3 +68,49 @@ git reset HEAD --hard
 git reset HEAD~2 --hard
 git reset 某次雜湊值 --hard
 
+
+
+---------------------------------------------------------
+
+// GitHub
+
+
+先在 GitHub 建立一個新的 repository (數據庫)
+
+
+複製(clone)遠端 GitHub 數據庫到本機端工作環境(近端)
+git clone https://github.com/GitHub帳號/要複製下來的數據庫名稱
+
+
+切換到 自訂的數據庫 資料夾
+cd 自訂的數據庫
+
+
+
+新增/修改檔案，上傳回 GitHub
+
+新增/修改檔案
+git add .
+git commit -m "每一次新增或修改的備註"
+
+將近端的數據庫(repository)上傳到 GitHub
+git push
+
+提取 GitHub 的內容到本機端工作環境
+git pull
+
+版本有衝突時
+git pull 
+編輯衝突部分，選擇保留哪些
+
+解決衝突之後，重新再 commit 一次
+git add .
+git commit -m "編輯衝突的部分"
+
+再次輸入 git push 指令上傳數據庫
+
+
+--------------------------------------------------------------
+// 去清除留在電腦上的使用者憑證
+控制台 | 使用者帳戶 | 認證管理員 | 管理 windows 認證
+
