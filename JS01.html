@@ -1,1 +1,50 @@
 <!-- JS01 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist</title>
+    <link rel="stylesheet" href="JS01.css">
+</head>
+<body>
+    <div class="app">
+        <input type="text" placeholder="請輸入代辦事項" class="input"
+            v-model="newTodo" v-on:keyup.enter="addTodo(newTodo)" >
+            <!-- 1.先用v-model取得資料，
+                2.再用事件(輸入停止並按下enter時)指定功能為addTodo:將取得的資料(newTodo)加入到list -->
+        <div class="title">Todolist</div>
+        <ul>
+            <li v-for="todo in todos">
+                {{todo.content}}    <!-- 外層是Vue的{}，內層是data的{} -->
+                -<a href="#" v-on:click.prevent="removeTodo(todo)">刪除</a>
+                <!-- prevent:取消預設動作(連結到某處)，而執行指定function(removeTodo) -->
+            </li>
+        </ul>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <script>
+        var app = new Vue({   //new出一個Vue物件
+            el:'.app',   // 可以用 .app 選 class ,或是用 #app 選 id
+            data:{
+                todos:[],   
+                newTodo:''
+            },
+            methods:{
+                addTodo: function(todo){
+                    this.todos.push({content: todo, completed: false})
+                    // 先用this抓到最外層的Vue物件，再去撈todos資料
+                },
+                removeTodo: function(todo){
+                    this.todos.splice(this.todos.indexOf(todo),1);
+                    // 先用indexOf找到資料
+                    // 再用splice刪除找到的資料,刪除範圍為1個長度
+                }
+            }
+            // this 就是function執行時當下最外層的物件，在這邊的this就是指最外層的整個Vue物件
+        })
+    </script>
+</body>
+</html>
