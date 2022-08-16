@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>關於api串接</title>
 </head>
+
 <body>
     <div>
-        <b>前端</b>常用的 JavaScript 請求方法，目前主要有4 種請求方法：<br>
+        <b>前端 </b>常用的 JavaScript 請求方法，主要有4 種請求方法：
         <ul>
             <li>jQuery ajax</li>
             <li>XMLHttpRequest</li>
@@ -30,15 +32,24 @@
         規範內容:如果想開啟跨來源 HTTP 請求的話，<br>
         Server 必須在 Response 的 Header 裡面加上 Access-Control-Allow-Origin。<br>
         => 要自己寫一個後端server<br>
-        <br><br><br>
+        <br>
         v2 : JSONP (JSON with Padding)<br>
         有些東西是不受同源政策限制的，例如說 script Tag，<br>
         我們經常引用的 CDN 或是 Google Analytics 之類的第三方套件就是一例。網址都是其他 Domain 的，但是卻能正常載入。<br>
         JSONP 就是利用 script 的這個特性來達成跨來源請求的。<br>
-        <br><br><br>
+        <br>
         利用 JSONP 也可以存取跨來源的資料。<br>
         但 JSONP 的缺點就是你要帶的那些參數永遠都只能用附加在網址上的方式（GET）帶過去，沒辦法用 POST。<br>
         如果能用 CORS 的話，還是應該優先考慮 CORS。<br>
     </div>
+    <hr>
+    <div>
+        檢査資料能不能撈取的網站: https://www.test-cors.org/<br>
+        在 Server 的 Remote URL 貼上你想撈取的網址 按 Send Request 就行了<br>
+        撈資料時都會回傳status ，告訴你取得資料的結果，例如:<br>
+        status：200 （ 表示成功取得資料 ）<br>
+        status：404（ 無此資料 ）<br>
+    </div>
 </body>
+
 </html>

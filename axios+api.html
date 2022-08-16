@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API003</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script> -->
+</head>
+
+<body>
+    <div>
+        <h2>用 axios 串接 氣象局api</h2>
+        <br>
+        右鍵inspect，可以看到consle.log有印出資料。<br>
+        <hr>
+        axios 其實就是個物件，<br>
+        Q: 我們要取物件的値該怎麼取？<br>
+        A: 會用<b> 物件名. 屬性 </b>去取得値<br>
+        axios .get 不外乎就是 一個叫 axios 的物件有一個叫 get 的屬性<br>
+    </div>
+    <hr>
+    <div>
+        <ul>
+            <b>axios優點:</b>
+            <li>使用方法類似於jQuery</li>
+            <li>可以搭配 async/await</li>
+            <li>支持Promise</li>
+            <li>可支援 Node.js 從後端發送的 Http request，這意味著 axios 可以兼用於前端與後端專案。</li>
+            <li>支援防CSRF</li>
+            <li>輕量化，約13KB</li>
+            <li>可以取消要求</li>
+            <li>直接自動將回應的 JSON 資料轉換成 JavaScript 的 Object，這十分方便！</li>
+            <li>可以用 axios.create 方法做API domain的管理(RESTful api???)</li>
+        </ul>
+        <b>axios缺點:</b><br>
+        需要使用catch做錯誤的捕捉與處理。
+    </div>
+    <hr>
+    <div class="result"></div>
+    <script>
+        // find elements
+        let result = document.querySelector('.result');
+
+        axios.get('https://opendata.cwb.gov.tw/api/v1/rest/datastore/W-C0033-001?Authorization=CWB-FD936122-D58A-4DE9-B2DE-B61469F2BD90')
+            .then(function (response) {   // Promise物件
+                console.log(response);
+
+                let data = response.data;   // 到這邊為止也可以簡短寫成.then(function (response.data)){}
+                console.log(data);
+
+                result.textContent = data.records.location[0].locationName;   // 秀第一筆資料
+            })
+            .catch(function (error) {
+                // handle error 錯誤處理
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+                console.log('I always Execued');
+            });
+
+        // GET請求
+        // axios.get('https://randomuser.me/api/')
+        //     .then((response) => console.log(response))
+        //     .catch((error) => console.log(error))
+
+        // POST請求
+        // axios.post('https://hexschool-tutorial.herokuapp.com/api/signup', {
+        //     email: '1234@gmail.com',
+        //     password: '1234'
+        // })
+        //     .then((response) => console.log(response))
+        //     .catch((error) => console.log(error))
+    </script>
+</body>
+
+</html>
