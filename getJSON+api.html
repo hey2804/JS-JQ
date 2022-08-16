@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API002</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <h2>用 JQ 的 getJSON 方法 串接 氣象局api</h2>
+        <br>
+        右鍵inspect，可以看到consle.log有印出資料。
+    </div>
+
+    <script>
+        
+        $.getJSON('https://opendata.cwb.gov.tw/api/v1/rest/datastore/W-C0033-001?Authorization=CWB-FD936122-D58A-4DE9-B2DE-B61469F2BD90')
+            .done(function (re) {
+                console.log(re);
+            })
+            .fail(function (w) {
+                alert("fail openapi")
+                console.log(w);
+            });
+
+        // GET請求
+        // axios.get('JQ-api01.php')
+        //     .then((response) => console.log(response))
+        //     .catch((error) => console.log(error))
+    </script>
+</body>
+
+</html>
