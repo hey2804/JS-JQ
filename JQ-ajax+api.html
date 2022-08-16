@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API004</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div>
+        <h2>用 jQuery $ajax 串接 氣象局api</h2><br>
+        右鍵inspect，可以看到consle.log有印出資料。
+    </div>
+    <hr>
+    <div>
+        <b>jQuery $ajax 缺點:</b><br>
+        <ul>
+            <li>基於原生的XHR開發，XHR本身的架構不清晰，並且已有了替代方案(Fetch)</li>
+            <li>jQuery的整個項目太大(3.4.1版約為86kb)，單純使用ajax卻要引入整個jQuery非常的不合理</li>
+            <li>因為整個項目太大，現在前端流行的Single Page Application 越來越少使用 jQuery 做為 request 的 library</li>
+        </ul>
+    </div>
+    <hr>
+    <div class="result"></div>
+    <script>
+        // find elements
+        var result = $(".result");
+
+        $.ajax({
+            url: 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/W-C0033-001?Authorization=CWB-FD936122-D58A-4DE9-B2DE-B61469F2BD90',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data); // console.log 全部資料
+                result.html(data.records.location[0].locationName); // 印出第一筆資料的LocationName
+            }
+        });
+    </script>
+</body>
+
+</html>

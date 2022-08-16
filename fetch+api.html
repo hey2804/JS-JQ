@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API005</title>
+</head>
+
+<body>
+    <div>
+        <h2>用 Fetch 串接 氣象局api</h2>
+        <br>
+        右鍵inspect，可以看到consle.log有印出資料。<br>
+        <br>
+        <b>與 $.ajax 不同點在於：</b><br>
+        fetch 會使用 ES6 的 Promise 作回應<br>
+        需使用 then 作為告知fetch進行下一步動作<br>
+        需要使用 catch 作為錯誤回應 (404, 500…)<br>
+        回傳的為 ReadableStream 物件，需要使用不同資料類型(json,blob)使用對應方法，才能正確取得資料物件。<br>
+    </div>
+    <ul>
+        Fetch 缺點:<br>
+        <li>對400，500都當做成功的請求，需要另外做處理</li>
+        <li>預設是沒有帶cookie</li>
+        <li>不支援timeout handle</li>
+        <li>不支援監測請求的進度</li>
+        <li>較早的瀏覽器並不支援(IE11以下不支援)</li>
+    </ul>
+    <hr>
+    <div class="result"></div>
+    <script>
+        // 用原生 JS 去 get Element
+        const result = document.querySelector('.result');
+
+        fetch('https://opendata.cwb.gov.tw/api/v1/rest/datastore/W-C0033-001?Authorization=CWB-FD936122-D58A-4DE9-B2DE-B61469F2BD90', {})
+            .then((response) => {   // fetch 如果得到回應就會回傳帶有 Response 的 Promise 物件，需使用 .then 將回傳值傳遞下去
+                // 處理 response
+                console.log(response);
+                return response.json();   // 因為氣象局檔案為 json 格式，所以這邊指定透過 json() 的方法處理檔案
+            })
+            .then((data) => {   // 回傳的資料則會傳到下一個 .then() 去指定要顯示的資料
+                var locationName = data.records.location[0].locationName;  // 指定顯示第一筆
+                result.textContent = locationName;   // 指定資料呈現的Element位置
+            })
+            .catch((err) => {
+                // 錯誤處理
+                console.log('錯誤:', err);
+            });
+    </script>
+</body>
+
+</html>
