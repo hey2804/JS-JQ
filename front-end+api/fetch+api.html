@@ -19,6 +19,12 @@
         需使用 then 作為告知fetch進行下一步動作<br>
         需要使用 catch 作為錯誤回應 (404, 500…)<br>
         回傳的為 ReadableStream 物件，需要使用不同資料類型(json,blob)使用對應方法，才能正確取得資料物件。<br>
+        <div>
+            在 Fetch() 回應的資料中，我們可以使用相關的屬性、方法傳遞給下一步做使用  .then() <br>
+            但要注意的是我們不能直接在回應資料中做資料取用，因為 Fetch 回應的資料，實際上是一個物件實例，<br>
+            我們所要做的，就是針對這一個物件實例中的 ReadableStream 做解析，相關的解析方法如下： <br>
+            |response.text() 轉成純字串 | response.blob() 轉成Blob物件 | response.formData() 轉成FormData物件
+        </div>
     </div>
     <ul>
         Fetch 缺點:<br>
