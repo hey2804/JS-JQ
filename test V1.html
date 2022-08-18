@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="card-wrap">
+            <div class="logo-warp">
+            </div>
+            <!-- 標題 -->
+            <div class="header-wrap">
+                <div class="date-wrap">
+                    <div>25</div>
+                    <div class="date-text">
+                        <div>Dec</div>
+                        <div>2022</div>
+                    </div>
+                </div>
+                <div class="week">SUNDAY</div>
+            </div>
+
+            <!-- 新增 -->
+            <div class="add-wrap">
+                <input id="addTodo" class="add-input" placeholder="請輸入待辦事項..." type="text" />
+                <div class="add-btn">新增</div>
+            </div>
+
+            <!-- 待辦事項列表 -->
+            <ul class="list-wrap">
+                <!-- 代辦事項元件 -->
+                <li class="todo-item">
+                    <input type="checkbox" id="checkTodo_1" class="ckeck-todo">
+                    <label for="checkTodo_1" class="content">JavaScript語法學習</label>
+                    <div class="delete-btn"><i class="fa-solid fa-trash-can"></i></div>
+                </li>
+                <li class="todo-item">
+                    <input type="checkbox" id="checkTodo_2" class="ckeck-todo">
+                    <label for="checkTodo_2" class="content">js框架學習</label>
+                    <div class="delete-btn"><i class="fa-solid fa-trash-can"></i></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(document).ready(() => {
+        // 1.串接「取得待辦事項」Api，取得待辦事項列表
+        $.ajax({
+            type: 'GET',  // 沒寫會默認GET
+            url: 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/W-C0033-001?Authorization=CWB-FD936122-D58A-4DE9-B2DE-B61469F2BD90',
+            // dataType: 'json',
+            success: function (data) {
+                // $('.list-wrap').empty(); //先清空代辦事項,再載入所有資料
+                console.log(data); // console.log 全部資料
+                console.log(typeof (data)); // 看看資料型態
+                // console.log(data.records.location[0].locationName); // 試取一筆資料
+                
+                const location = data.records.location;
+                console.log(location);
+                let len = location.length; // 得到共有幾筆資料
+                console.log(len);
+                // const locationList = JSON.stringify(location);    // JSON.stringify(): 將 object/array 轉為 string
+                // console.log(locationList);
+                // const getAry = JSON.parse(locationList);    // JSON.parse(): 將 sring 轉為 array
+                // console.log(getAry);
+
+                location.forEach( (info,index) => {
+                    let newItem = document.createElement("li");
+                    newItem.className = "todo-item";
+                    document.querySelector(".list-wrap").appendChild(newItem);
+                    const list = `
+                            <input type="checkbox" id="${index+1}" class="ckeck-todo">
+                            <label for="${index+1}" class="content">${info.locationName}</label>
+                            <div class="delete-btn"><i class="fa-solid fa-trash-can"></i></div>
+                    `
+                    newItem.innerHTML = list;
+                });
+            // .done((data) => {
+            //     const getApi = JSON.parse(data.todos[0].todos);    
+            //     getApi.forEach((storedTodo) => {
+            //         let li;
+            //         if (storedTodo.state === 1) {
+            //         li = template.replace(/something/gi, storedTodo.content);
+            //         }
+            //         $('.list-wrap').append(li);
+            //     });
+
+            },
+            error: function (err) { console.log(err) }
+        });
+        // 建立一個todo的模板
+        const template = `
+            <li class="todo-item">
+                <input type="checkbox" id="{id}" class="ckeck-todo" {checked}>
+                <label for="{id}" class="content">something</label>
+                <div class="delete-btn"><i class="fa-solid fa-trash-can"></i></div>
+            </li>
+        `;
+
+        // 新增代辦事項
+        $('.add-btn').click(() => {
+            const value = $('.add-input').val();  // 先將輸入框的值存為一個變數
+            // console.log(value);
+            lis = document.getElementsByTagName('li');
+            console.log('li項目總共有',lis.length);    // 取出li,計算有幾項,用於給id
+            const id = lis.length + 1;
+            const checked = $('.ckeck-todo').checked === 1 ? 'checked' : '';   // 三元運算子判斷checkbox狀態,並指定為一個變數
+            const newTodo = template.replace(/something/gi, value).replace(/{checked}/g, checked).replace(/{id}/g, id);   // 用正規表示式替換模板內容為value
+            // console.log(newTodo);
+            if (value.trim() !== '') {   // 若輸入內容不為空值
+                $('.list-wrap').prepend(newTodo);   // 將新內容增加至todolist中
+            }
+            $('.add-input').val('');   // 清空輸入框
+
+            // 2.串接「新增待辦事項」APi，新增一筆待辦事項
+            // 建立一個空物件 存放輸入的todo用 物件包含三個屬性(輸入內容、核取狀態、id) 
+            // todo = {content: '',state: 1 or 2, id: 1 }
+            const todo = {};
+            if ($('.ckeck-todo').checked) {   // 判斷是否為勾選checkbox的狀態
+                todo.state = 1;    //勾 = 1
+            } else {
+                todo.state = 2;    //沒勾 = 2
+            }
+            todo.content = value;       // 設定物件的內容屬性為輸入值
+            todo.id = id;         // 設定物件的id屬性為id
+            console.log(todo);
+            $.ajax({
+                type: 'POST',
+                url: 'http://httpbin.org/post',
+                //   dataType: 'json',
+                data: todo,
+            })
+                .done((data) => {    // api連線成功,將新資料存入api後,在網頁執行以下內容
+                    console.log('success!');
+                    console.log(data);
+                })
+                .fail(err => console.log(err));
+        });
+        // 刪除 todo
+        // 使用事件代理監聽 .list-wrap 區塊，當 .delete-btn 被點擊時，往上找到整個todo並移除
+        $('.todo-item').on('click', '.delete-btn', (e) => {   // 找到刪除鍵，指定事件
+            $(e.target).parent().remove();  // 從刪除鍵往上找一層，移除整個todo
+        });
+        // 3.串接「刪除待辦事項」Api，刪除單筆待辦事項
+        // 因為每個代辦事項有將 id 存入資料庫,故刪除時不能像新增那樣去讀取網頁上有幾個 li 來給 id 的值
+        // 必須去撈出 api 裡面的待辦事項 id
+
+    });
+
+    
+    // function createDomElement(todoList) {
+    //     const domElements = todoList.map(todo => {
+    //         return `
+    //             <li class="todo-item">
+    //                 <input type="checkbox" id="" class="ckeck-todo">
+    //                 <label for="" class="content">${todo.content}</label>
+    //                 <div class="delete-btn"><i class="fa-solid fa-trash-can"></i></div>
+    //             </li>
+    //         `;
+    //     }).join("");
+
+    //     const listWrap = document.querySelector('.list-wrap');
+    //     listWrap.innerHTML = domElements;
+    // };
+    
+   
+    // 4.串接「更改待辦事項狀態」Api，利用checkBox更改待辦事項狀態
+
+
+
+// Save todo to database
+
+    // 要存什麼樣的資料給後端資料庫？
+    // 要把整坨 todos 的 HTML 都塞給後端資料庫嗎？
+    // 其實可以只存內容和狀態的部份，其他的 HTML tag 都是重複的，不是會異動的資料。
+
+    // 實作上會像這樣，遍歷 HTML 之後把所有 todo 的內容都存起成物件，
+    // 把完成的 todo 設為 status: 1，沒完成的設為 status: 2。
+
+    // $(document).on('click', '.save', () => {
+    //     const todoList = [];    // 建一個要存放todo項目的空陣列
+    //     const oldTodos = document.querySelectorAll('.todo-item');   // 取下所有的項目存為一個變數(陣列)
+    //     oldTodos.forEach((todoItem) => {     // 遍歷陣列裡的每個項目
+    //         const todo = {};        // 建立一個空物件,用來存取每一個todoItem的內容和狀態,todo = {content: '',state: 1 or 2 }
+    //         if (todoItem.is(":checked")) {    //if(todoItem[i].checked)   // 判斷是否為勾選checkbox的狀態
+    //             todo.state = 1;
+    //         } else {
+    //             todo.state = 2;
+    //         }
+    //         todo.content = todoItem.querySelector('.content').textContent;
+    //         todoList.push(todo);   // 將處理過的項目加到陣列
+    //     });
+    //     const stringTodoList = JSON.stringify(todoList);    // JSON.stringify(): 將 array 轉為 string
+    //     const newTodos = { todos: stringTodoList };
+    //     console.log(newTodos);
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: 'http://httpbin.org/post',
+    //         //   url: `${APIUrl}/api_add_todos.php`,
+    //         data: newTodos,
+    //     })
+    //     .done((data) => {    // api連線成功,將新資料存入api後,在網頁執行以下內容
+    //         console.log(data);
+    //     })
+    //     .fail(err => console.log(err));
+    // });
+
+
+// read todo by userID
+    // $.ajax({
+    //   type: 'GET',
+    //   url: `${APIUrl}/api_todos.php?userID=${userID}`,
+    // })
+    //   .done((data) => {
+    //     const getApi = JSON.parse(data.todos[0].todos);
+    //     getApi.forEach((storedTodo) => {
+    //       let li;
+    //       if (storedTodo.state === 1) {
+    //         li = template.replace(/something/gi, storedTodo.content);
+    //       }
+    //       $('.list-wrap').append(li);
+    //     });
+
+    //     document.querySelectorAll('.todo').forEach((todo) => {
+    //       if (todo.classList.contains('completed')) {
+    //         todo.querySelector('.content').classList.add('completed-item');
+    //         todo.querySelector('.check.btn').classList.add('completed');
+    //         todo.querySelector('.check.btn').classList.add('btn-secondary');
+    //         todo.querySelector('.check.btn').textContent = '未完成';
+    //         todo.querySelector('.edit').style.display = 'none';
+    //       }
+    //     });
+    //   })
+    //   .fail(err => console.log(err));
+
+</script>
+
+</html>
