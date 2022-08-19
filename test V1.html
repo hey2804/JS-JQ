@@ -100,6 +100,7 @@
             },
             error: function (err) { console.log(err) }
         });
+
         // 建立一個todo的模板
         const template = `
             <li class="todo-item">
@@ -109,7 +110,7 @@
             </li>
         `;
 
-        // 新增代辦事項
+        // 新增 todo
         $('.add-btn').click(() => {
             const value = $('.add-input').val();  // 先將輸入框的值存為一個變數
             // console.log(value);
@@ -143,61 +144,66 @@
                 data: todo,
             })
                 .done((data) => {    // api連線成功,將新資料存入api後,在網頁執行以下內容
-                    console.log('success!');
+                    console.log('post success!');
                     console.log(data);
                 })
                 .fail(err => console.log(err));
         });
+        
         // 刪除 todo
         // 使用事件代理監聽 .list-wrap 區塊，當 .delete-btn 被點擊時，往上找到整個todo並移除
         $('.list-wrap').on('click', '.delete-btn', (e) => {   // 指定發生click事件的 .delete-btn元素
             // 3.串接「刪除待辦事項」Api，刪除單筆待辦事項
             $.ajax({
-                type: 'POST',
+                type: 'DELETE',
                 url: 'http://httpbin.org/delete',
             })
-                .done(() => {    // api連線成功,將新資料存入api後,在網頁執行以下內容
-                    console.log('success!');
+                .done((data) => {    // api連線成功,將新資料存入api後,在網頁執行以下內容
+                    console.log('delete success!');
+                    // console.log(data);
                     $(e.target).parent().remove();   // 從刪除鍵往上找一層，移除整個todo
+                    // let deleteData = $(e.target).parent().remove();
+                    // console.log(deleteData);
                 })
                 .fail(err => console.log(err));              
-        });        
+        });
         // 因為每個代辦事項有將 id 存入資料庫,故刪除時不能像新增那樣去讀取網頁上有幾個 li 來給 id 的值
         // 必須去撈出 api 裡面的待辦事項 id
 
         // $('.list-wrap').on('click', '.delete-btn', (e) => {   // 指定發生click事件的 .delete-btn元素
         //     $(e.target).parent().remove();   // 從刪除鍵往上找一層，移除整個todo          
         // });
-        
-        // 4.串接「更改待辦事項狀態」Api，利用checkBox更改待辦事項狀態
-        // 先讀取每個input的checkBox狀態
-        // if狀態更改  則進行ajax連線 連線成功即將更改的狀態寫入資料庫(api)
-        $.ajax({
-                type: 'PATCH',
-                url: 'http://httpbin.org/patch',
-            })
-                .done(() => {    // api連線成功,執行以下內容
-                    console.log('patch success!');
-                })
-                .fail(err => console.log(err));  
-
     });
 
-    
-    // function createDomElement(todoList) {
-    //     const domElements = todoList.map(todo => {
-    //         return `
-    //             <li class="todo-item">
-    //                 <input type="checkbox" id="" class="ckeck-todo">
-    //                 <label for="" class="content">${todo.content}</label>
-    //                 <div class="delete-btn"><i class="fa-solid fa-trash-can"></i></div>
-    //             </li>
-    //         `;
-    //     }).join("");
+        
+    // 4.串接「更改待辦事項狀態」Api，利用checkBox更改待辦事項狀態
+    // 先讀取每個input的checkBox狀態
+    // if狀態更改  則進行ajax連線 連線成功即將更改的狀態寫入資料庫(api)
+    // $.ajax({
+    //         type: 'PATCH',
+    //         url: 'http://httpbin.org/patch',
+    //     })
+    //         .done(() => {    // api連線成功,執行以下內容
+    //             console.log('patch success!');
+    //         })
+    //         .fail(err => console.log(err));  
 
-    //     const listWrap = document.querySelector('.list-wrap');
-    //     listWrap.innerHTML = domElements;
-    // };
+
+    
+// function createDomElement(todoList) {
+//     const domElements = todoList.map(todo => {
+//         return `
+//             <li class="todo-item">
+//                 <input type="checkbox" id="" class="ckeck-todo">
+//                 <label for="" class="content">${todo.content}</label>
+//                 <div class="delete-btn"><i class="fa-solid fa-trash-can"></i></div>
+//             </li>
+//         `;
+//     }).join("");
+
+//     const listWrap = document.querySelector('.list-wrap');
+//     listWrap.innerHTML = domElements;
+// };
     
    
 
