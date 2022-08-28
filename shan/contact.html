@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    
+    <div class="frame3">
+        <h1 id="contact" class="headlineC">Contact</h1>
+        <div class="container">
+            <div class="inputContainer">
+                <label class="input" for="">Name</label>
+                <input type="text" size="30"><br>
+            </div>
+            <div class="inputContainer">
+                <label class="input" for="">E-mail</label>
+                <input type="email" size="30"><br>
+            </div>
+            <div class="inputContainer">
+                <label class="input" for="">Message</label>
+                <textarea id="rotateLogo" name="" cols="30" rows="10">:)</textarea>
+            </div>
+
+            <button class="btnSend">Send</button>
+        </div>
+
+        <div id="moveIn" class="moveIn opacity">
+            <div class="logoBox">
+                <img class="rotateLogo" src="./images/Logo-08.png" alt="!">
+            </div>
+            <div class="logoBox2">
+                <img class="rotateLogo" src="./images/Logo-08.png" alt="!">
+            </div>
+            <div class="logoBox3">
+                <img class="rotateLogo" src="./images/Logo-08.png" alt="!">
+            </div>
+            <div class="logoBox4">
+                <img class="rotateLogo" src="./images/Logo-08.png" alt="!">
+            </div>
+        </div>
+    </div>
+    <script>        
+        // Message事件
+        var rotateLogo = document.getElementById("rotateLogo");
+        rotateLogo.addEventListener("keydown", rotateIn);
+        rotateLogo.addEventListener("keyup", paused);
+
+        function rotateIn() {
+            $("#moveIn").removeClass("opacity");
+        }
+        function paused() {
+            $("#moveIn").addClass("opacity");
+        }
+    </script>
+</body>
+
+</html>

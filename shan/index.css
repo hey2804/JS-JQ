@@ -1,0 +1,1033 @@
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap');
+
+/* global */
+* {
+    position: relative;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    overflow-x: hidden;
+    /* 讓瀏覽器的X軸隱藏=網頁不能左右滑動 */
+}
+
+
+h1 {
+    font-family: 'Noto Serif Display', serif;
+    font-size: 120px;
+    letter-spacing: 6px;
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 60px;
+    writing-mode: vertical-rl;
+    margin: 0 10%;
+    padding-top: 10%;
+}
+p{        /* 個別文字說明 */
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    writing-mode: vertical-rl;
+    margin: 0;
+    padding: 0;
+    padding-top: 15%;
+    position: relative;    /* 給偽元素定位 */
+}
+p:before{
+    content: "";
+    background-color: #FF6F61;
+    width: 0;
+    height: 80%;     /* 高度佔父層<p>的80% */
+    display: inline-block;
+    position: absolute;    /* 定位在父層<p> */
+    top: 12%;    left: 0;
+    z-index: -1;
+
+    transition: width .5s;
+}
+p:hover:before{
+    width: 55%;
+}
+span {        /* 留言區輸入文字的標題 */
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #FF6F61;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #FF6F61; 
+}
+
+a:visited {
+    color: #FF6F61;
+}
+
+
+/* 框線設定 */
+.wrapper {
+    position: relative;
+    max-width: 100vw;
+    margin: 0 auto;
+}
+
+.container {
+    width: 1170px;
+    height: 100%;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+    position: relative;
+    overflow: hidden;
+}
+
+/* 元件基本設定 */
+.elements {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* border: 1px solid #000; */
+    color: #fff;
+    padding: 10px;
+}
+
+.givePadding {
+    padding-top: 10%;
+    padding-bottom: 5%;
+}
+/* navbar */
+.navbar {
+    margin: 0;
+    position: relative;
+    height: 100vh;
+    border-bottom: 1px solid #000;
+}
+.navElements {
+    color: black;
+    font-size: 40px;
+    font-family: 'Noto Serif Display', serif;
+    font-weight: 600;
+    letter-spacing: 3px;
+
+    width: 200px;
+    height: 50px;
+    margin: 1% 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.logoOutter{
+    width: 80px;
+    height: 80px;
+    /* border: 1px solid #000; */
+    position: absolute;
+    top: 3%;
+    left: 0;
+}
+.logo{
+    width: 100%;
+    height: 100%;
+}
+.navLogo {
+    width: 500px;
+    height: 500px;
+
+    /* margin: 0 auto; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    font-family: 'Vollkorn', serif;
+    font-weight: 600;
+    color: #fff;
+}
+
+.rec {
+    width: 100px;
+    height: 150px;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 275px;
+}
+
+.typography {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #000;
+
+    position: absolute;
+    top: 0;
+    left: 25px;
+}
+
+.titleTypography {
+    font-size: 24px;
+    letter-spacing: 3px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.posterBorder {
+    width: 225px;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.poster {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: black;
+
+    position: absolute;
+    top: 0;
+    left: 75px;
+}
+
+.titlePoster {
+    writing-mode: vertical-rl;
+    font-size: 60px;
+    position: absolute;
+    top: 5%;
+    right: 50%;
+}
+.illustrationBorder {
+    width: 250px;
+    height: 300px;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+}
+.illustration {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: black;
+
+    position: absolute;
+    bottom: 0;
+    right: 100px;
+}
+.titleIllustration {
+    writing-mode: vertical-rl;
+    position: absolute;
+    left: 50%;
+    bottom: 3%;
+
+    font-size: 40px;
+}
+.photographyBorder {
+    width: 250px;
+    height: 250px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.photography {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: black;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}
+
+.titlePhotography {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 200px;
+    height: 200px;
+}
+
+svg{
+    width: 100%;
+    height: 100%;
+    font-size: 32px;
+    stroke: none;
+    stroke-width: 0.5px;
+}
+
+.line {
+    width: 1px;
+    height: 100px;
+    background-color: black;
+
+    position: absolute;    /* 定位在navbar */
+    right: 0;
+    bottom: 3%;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #FF6F61;
+
+    position: absolute;    /* 定位在line */
+    top: 0;
+    left: -5px;
+
+    animation-name: scroll;
+    animation-duration: 1.5s;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes scroll {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* section */
+/* .main {
+    background-color: lightblue;
+} */
+
+.headlineT {
+    position: relative;
+    left: 5%;
+    margin-top: 5%;
+}
+
+.headlinePoster {
+    text-align: right;
+}
+
+.headlineI {
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 0;
+}
+
+.headlineP {
+    text-align: end;
+    margin-top: 10%;
+    margin-bottom: -10%;
+}
+
+.headlineC {
+    margin-top: 0;
+    margin-left: 5%;
+}
+
+/* typography區塊設定 */
+
+.meaning {
+    width: 100%;
+    height: 90%;
+    /* border: 1px solid blue; */
+    color: black;
+    padding: 5% 0;
+    margin: 5% 0;
+
+    writing-mode: vertical-rl;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+
+    position: relative;
+}
+.meaningReverse {
+    width: 100%;
+    height: 90%;
+    /* border: 1px solid blue; */
+    color: black;
+    padding: 5% 0;
+    padding-left: 5%;
+    /* margin: 5% 0; */
+
+    writing-mode: vertical-lr;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+
+    position: relative;
+}
+
+.original {
+    width: 70%;
+    height: 85%;
+    border-right: 10px double black;
+    border-left: 10px solid black;
+    overflow: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.originalReverse {
+    width: 70%;
+    height: 90%;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.zhang{
+    font-family: 'Noto Serif TC', serif;
+    font-size: 200px;
+
+    position: absolute;
+    bottom: 35%;
+    left: 30%;
+}
+.zhangBox{
+    width: 100%;    height: 100%;    /* 圖框撐滿父層originalReverse */
+    overflow: hidden;
+    /* padding: 5%; */
+    border-radius: 50px;
+}
+.zhangPic{
+    width: 100%;    height: auto;
+    position: absolute;
+    top: 0;    left: 0;
+}
+.skew{
+    transform: scale(1,1);
+    /* position: relative; */
+
+    animation-name: skew;
+    animation-direction: alternate;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    /* animation-play-state: paused|running; */
+    /* 利用CSS動畫播放狀態簡單達到hover時開始播放的效果 */
+}
+section a{
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 70px;
+    text-align: center;
+    writing-mode: lr-tb;
+    color: #fff;
+    background-color: #FF6F61;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    top: 70%;
+    right: 20%;
+}
+
+@keyframes skew {
+    0% {
+        transform: scale(1,1);
+    }
+    25%{
+        transform: scale(3,1);
+    }
+    75%{
+        transform: scale(1,1);
+    }
+    100% {
+        transform: scale(1,3);
+    }
+}
+.nervous{   
+    /* position: relative; */
+
+    animation-name: nervous;
+    animation-delay: 1s;
+    animation-direction: alternate;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes nervous {
+    0%{
+        color: black;
+    }
+    10%{
+        bottom: 75%;
+        border-radius: 50%;
+    }
+    20%{
+        bottom: 35%;
+        border-radius: 50%;
+    }
+    40% {
+        transform: scale(.5,.5) perspective(250px) rotateX(45deg);
+    }
+    60%{
+        transform: scale(3,2) perspective(500px);
+        color: palegreen;
+    }
+    80%{
+        transform: scale(.5,.5) perspective(250px) rotateY(90deg);
+        color: purple;
+    }
+    100% {
+        transform: skewY(90deg);
+        color: aqua;
+    }
+}
+.opacity{
+    opacity: 0;
+}
+.blur{
+    filter: blur(2px);
+}
+.blur:hover{
+    filter: blur(0);
+}
+
+.ziBox{
+    width: 100%;    height: 100%;    /* 圖框撐滿父層originalReverse */
+    overflow: hidden;
+    padding: 5%;
+    border-radius: 50px;
+}
+.ziBox:hover{
+    border-radius: 0;
+    transition: .5s;
+}
+.zi{
+    height: auto;    width: 100%;    /* 圖片等比例置入 */
+    position: absolute;
+    top: 0;    left: 0;
+}
+.nightSky{
+    width: 100%;    height: 100%;     /* div佔滿ziBox */
+    position: absolute;
+    top: 0;    left: 0;
+    background-image: linear-gradient(to bottom,#113285,#0B1013 70%);
+}
+.shine1{
+    color: gold;
+    font-size: 10px;
+    font-weight: 900;
+    filter: blur(1px);
+
+    animation-name: shine1;
+    animation-delay: 3s;
+    animation-direction: alternate;
+    animation-duration: 3s;
+    /* animation-timing-function: linear; */
+    animation-iteration-count: infinite;
+}
+@keyframes shine1{
+    0% {
+        filter: blur(1px);
+    }
+    50%{
+        filter: blur(3px);
+        color: #fff;
+    }
+    100%{
+        filter: blur(1px);
+        color: gold;
+        font-size: 5px;
+    }
+}
+.shine2{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 900;
+    filter: blur(3px);
+
+    animation-name: shine2;
+    animation-delay: 1s;
+    animation-direction: alternate;
+    animation-duration: 2s;
+    /* animation-timing-function: linear; */
+    animation-iteration-count: infinite;
+}
+@keyframes shine2{
+    0% {
+        filter: blur(3px);
+    }
+    50%{
+        filter: blur(0);
+        color: gold;
+        font-size: 10px;
+    }
+    100%{
+        filter: blur(1px);
+        color: #fff;
+        font-size: 15px;
+    }
+}
+.shine3{
+    color: gold;
+    font-size: 30px;
+    font-weight: 900;
+    filter: blur(5px);
+
+    animation-name: shine3;
+    animation-delay: 1s;
+    animation-direction: alternate;
+    animation-duration: 3s;
+    /* animation-timing-function: linear; */
+    animation-iteration-count: infinite;
+}
+@keyframes shine3{
+    0% {
+        filter: blur(5px);
+    }
+    50%{
+        filter: blur(0);
+        color: #fff;
+        font-size: 20px;
+    }
+    100%{
+        filter: blur(3px);
+        color: gold;
+        font-size: 15px;
+    }
+}
+.star1{
+    position: absolute;
+    bottom: 50%;
+}
+.star2{
+    position: absolute;
+    bottom: 55%;
+    left: 30%;
+}
+.star3{
+    position: absolute;
+    bottom: 65%;
+    left: 25%;
+}
+.star4{
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+}
+.star5{
+    position: absolute;
+    bottom: 60%;
+    left: 75%;
+}
+.star6{
+    position: absolute;
+    bottom: 80%;
+    left: 5%;
+}
+.star7{
+    position: absolute;
+    bottom: 70%;
+    right: 0;
+}
+.star8{
+    position: absolute;
+    bottom: 60%;
+    right: 5%;
+}
+.star9{
+    position: absolute;
+    bottom: 85%;
+    right: 15%;
+}
+.star10{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.star11{
+    position: absolute;
+    bottom: 95%;
+    right: 50%;
+}
+.star12{
+    position: absolute;
+    bottom: 55%;
+    right: 85%;
+}
+.star13{
+    position: absolute;
+    bottom: 90%;
+    right: 85%;
+}
+.star14{
+    position: absolute;
+    bottom: 55%;
+    right: 25%;
+}
+.star15{
+    position: absolute;
+    bottom: 55%;
+    right: 85%;
+}
+.star16{
+    position: absolute;
+    bottom: 85%;
+    right: 50%;
+}
+.star17{
+    position: absolute;
+    bottom: 60%;
+    right: 5%;
+}
+
+.coralCube{
+    width: 100%; height: 100%;
+    position: relative;
+}
+.cube{ 
+    writing-mode:horizontal-tb;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: black;
+    text-align:start;
+    padding: 1%;
+    padding-right: 0;
+    
+    width: 15%;
+    height: 25%;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);    
+    border: 3px solid #fff;
+    border-bottom: 45px solid #fff;
+    position: absolute;
+}
+.color1{ 
+    background-color: #FF6F61; 
+    bottom: 60%;
+    left: 15%;
+}
+.color2{
+    background-color: #FF7F50;
+    bottom: 60%;
+    left: 30%;
+}
+.color3{
+    background-color: #F08080;
+    bottom: 60%;
+    left: 45%;
+}
+.color4{
+    background-color: #F17C67;
+    bottom: 20%;
+    left: 35%;
+}
+.color5{
+    background-color: #f5b1aa;
+    bottom: 20%;
+    left: 50%;
+}
+.color6{
+    background-color: #f04a3a;
+    bottom: 20%;
+    left: 65%;
+}
+.shanBox{
+    width: 100%;    height: 100%;    /* 圖框撐滿父層original */
+    overflow: hidden;
+    border-radius: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.shanBox:hover{
+    border-radius: 0;
+    transition: .5s;
+}
+.shan{
+    height: auto;    width: 100%;    /* 圖片等比例置入 */
+    position: absolute;
+    top: 0;    left: 0;
+}
+
+/* poster區塊設定 */
+.frame{
+    width: 100vw;
+    height: 100vh;
+    border-top: 1px solid #000;
+}
+.gallery{
+    /* border: 1px solid blue; */
+    width: 100vw;
+    height: auto;
+    padding: 3% 0;
+    overflow-X: scroll;
+    white-space: nowrap;
+}
+/* 自訂滾動條樣式! */
+.gallery::-webkit-scrollbar{
+    height: 8px;
+}
+.gallery::-webkit-scrollbar-thumb {
+    background-color: #FF6F61;
+    border-radius: 4px;  
+  }
+.bannerBox{
+    width: 40%;
+    /* border: 3px solid red; */
+    margin: 0 5%;
+    display: inline-block;
+}
+.posterBox{
+    width: 20%;
+    /* border: 3px solid red; */
+    margin: 0 5%;
+    display: inline-block;
+}
+.banner{
+    width: 100%;  height: auto;
+}
+.posters {
+    width: 100%;  height: auto;
+}
+.horizoneLine {
+    width: 100px;
+    height: 1px;
+    background-color: black;
+
+    position: absolute;    /* 定位在gallery */
+    left: 50%;
+    top: 0;
+}
+.horizoneCircle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #FF6F61;
+
+    position: absolute;    /* 定位在horizoneLine */
+    top: -5px;
+    left: 0;
+
+    animation-name: scrollRight;
+    animation-duration: 2s;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+@keyframes scrollRight {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 100px;
+    }
+}
+
+/* illustration區塊設定 */
+.frame2{
+    width: 100vw;
+    height: 100vh;
+    border-bottom: 1px solid #000;
+}
+.gallery2{
+    /* border: 1px solid blue; */
+    width: 100vw;
+    height: auto;
+    padding: 3% 0;
+    margin-bottom: 0;
+    overflow-X: scroll;
+    white-space: nowrap;
+}
+.gallery2::-webkit-scrollbar{
+    height: 8px;
+}
+.gallery2::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 4px;  
+  }
+.paintingBox{
+    width: 50%;
+    margin: 0 2% 0 0;
+    display: inline-block;
+}
+.paintings {
+    width: 100%;  height: 100%;
+}
+/* photography區塊設定 */
+/* 這區塊練習用flex排版 */
+.pics{
+    width: 100%; height: auto;    /* 設定img寬度符合外框,高度自動調整 */
+    
+    border-top-left-radius: 10% 20%;
+    border-bottom-right-radius: 10% 20%; 
+}
+.pics:hover{
+    border-radius: 0;
+    transition: .5s;
+}
+
+    /* flex-Ver 1 */
+.row {
+    margin: 0;
+    padding-top: 5%;
+    display: flex;
+    /* flex-wrap: wrap; */
+}
+.col-2{
+    /* background-color: pink; */
+    padding: 0 1%;
+    flex: 2;
+}
+.col-1{
+    /* background-color: pink; */
+    padding: 0 1%;
+    flex: 1;    /* 在同一行中就佔 1 份位置,若有兩個物件就均分 */
+
+    display: flex;
+    flex-direction: column;
+}
+
+    /*  flex-Ver 2 */
+.row-2{    
+    padding-top: 5%;
+    display: flex;
+    /* justify-content: space-between; */
+}
+.col-1-3{
+    /* background-color: pink; */
+    padding: 0 1%;
+    flex: 1;    /* 在同一行中就佔 1 份位置,若有兩個物件就均分 */
+}
+
+
+
+/* footer */
+input {
+    outline-style: none;    /* 取消(預設的樣式)輸入文字時文字方塊加深 */
+    border: 0;    /* 取消預設邊框 */
+    border-bottom: 1px solid #000;    /* 自定義的輸入框底線 */
+    padding: 10px 20px 0 20px;
+}
+.inputContainer {
+    padding-top: 1%;
+    font-family: 'Noto Serif Display', serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.btnSend {
+    color: white;
+    font-size: 24px;
+    font-family: 'Noto Serif Display', serif;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #FF6F61;
+    border: none;
+
+    margin: 3%;
+    margin-left: 0;
+}
+.frame3{
+    width: 100%;
+    height: 100%;
+}
+/* .inputframe{
+    border: 1px solid #000;
+} */
+.moveIn{
+    width: 60%;    height: 100vh;
+    position: absolute;
+    top: -20%; right: 0;
+    overflow: hidden;
+    transition: .5s;
+    /* border: 1px solid #000; */
+}
+.logoBox{
+    width: 15%;    height: auto;
+    /* border: 1px solid #000; */
+    position: absolute;
+    bottom:75%;
+    left: 45%;
+
+    animation-name: moveIn;
+    animation-duration: 7s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.logoBox2{
+    width: 15%;    height: auto;
+    position: absolute;
+    bottom:55%;
+    left: 45%;
+
+    animation-name: moveIn;
+    animation-duration: 7s;
+    animation-direction: reverse;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.logoBox3{
+    width: 15%;    height: auto;
+    position: absolute;
+    bottom:35%;
+    left: 45%;
+
+    animation-name: moveIn;
+    animation-duration: 7s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.logoBox4{
+    width: 15%;    height: auto;
+    position: absolute;
+    bottom:10%;
+    left: 45%;
+
+    animation-name: moveIn;
+    animation-duration: 7s;
+    animation-direction: reverse;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes moveIn {
+    0% {
+        left: 45%;
+        transform: rotate(0deg);
+    }
+    25%{
+        left: 0;        
+        transform: rotate(-360deg);
+    }
+    50%{
+        transform: rotate(0deg);
+    }
+    75%{
+        left: 90%;
+        transform: rotate(360deg);
+    }
+    100% {
+        left: 45%;
+        transform: rotate(0deg);
+    }
+}
+
+.rotateLogo{
+    width: 100%;    height: 100%;
+}

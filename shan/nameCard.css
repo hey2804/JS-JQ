@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+
+*{
+    font-family:  "Ubuntu", "Noto Sans TC", "Times New Roman", Times, serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    line-height: 18px;
+    box-sizing: border-box;
+}
+html,body{
+    background-color: whitesmoke;
+    position: relative;
+}
+.nameCard{   
+    color: olive; 
+    width: 300px; height: 300px;
+    border-radius: 3%;
+    background-color: #fff;
+    box-shadow: 0 ;
+    position: relative;
+    margin: 10% auto;
+    padding: 50px 35px;
+    overflow: hidden;
+
+    animation-name: shadow;
+    animation-duration: .5s;
+    animation-delay: .5s;    
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes shadow{
+    0%{
+        box-shadow: 0;
+    }
+    100%{
+        box-shadow: -20px 20px 10px -10px gray;
+    }
+}
+
+a{
+    text-decoration: none;
+    color: olive;
+}
+
+.sun{
+    position: absolute;
+    top: 60px;
+    right: -60px;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background-color: gold;
+
+    animation-name: moveLeft;
+    animation-duration: 1s;
+    animation-delay: 3.5s;    
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes moveLeft{
+    0%{
+        right: -60px;
+    }
+    100%{
+        right: -10px;;
+    }
+}
+
+.name{
+    font-size: 24px;
+    font-weight: 300;
+    color: green;
+    line-height: 30px;
+}
+.iconGroup{
+    width: 230px; height: 175px;
+    border-bottom: 2px solid darkolivegreen;
+    position: absolute;
+    bottom: 48px;
+    overflow: hidden;
+    opacity: 0;
+
+    animation-name: show;
+    animation-duration: 2s;
+    animation-delay: 2.5s;    
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+.iconL{
+    width: 75px; height: 75px;
+    background-color: olivedrab;
+    border-radius: 0 10%;
+    opacity: 1;
+    transform: rotate(-45deg);
+    position: absolute;
+    bottom:  -21%;
+    left: 40%;
+    /* 加點陽光灑落的感覺 */
+    box-shadow: 0;
+
+    animation-name: shadowL;
+    animation-duration: 1.5s;
+    animation-delay: 3s;    
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes shadowL{
+    0%{
+        box-shadow: 0;
+    }
+    100%{
+        box-shadow: inset -15px 0 25px lightgoldenrodyellow;
+    }
+}
+.iconM{
+    width: 50px; height: 50px;
+    background-color: green;
+    border-radius: 0 20%;
+    opacity: 0.8;
+    transform: rotate(-45deg);
+    position: absolute;
+    bottom: -15%;
+    left: 20%;
+    /* 加點陽光灑落的感覺 */
+    box-shadow: 0;
+
+    animation-name: shadowL;
+    animation-duration: 1.5s;
+    animation-delay: 3.5s;    
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes shadowM{
+    0%{
+        box-shadow: 0;
+    }
+    100%{
+        box-shadow: inset -10px 0 15px gold;
+    }
+}
+.iconS{
+    width: 25px; height: 25px;
+    background-color: darkgreen;
+    border-radius: 0 15%;
+    opacity: 0.7;
+    transform: rotate(-45deg);
+    position: absolute;
+    bottom: -7.5%;
+    left: 85%;
+    /* 加點陽光灑落的感覺 */
+    box-shadow: 0;
+
+    animation-name: shadowL;
+    animation-duration: 1.5s;
+    animation-delay: 4s;    
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes shadowS{
+    0%{
+        box-shadow: 0;
+    }
+    100%{
+        box-shadow:inset -5px 0 15px gold;
+    }
+}
+b{
+    position: absolute;
+    left: 35px;
+    opacity: 0;
+
+    animation-name: show;
+    animation-duration: 2s;
+    animation-delay: 2s;    
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.info{
+    position: absolute;
+    left: 35px;
+    opacity: 0;
+
+    animation-name: show;
+    animation-duration: 2s;
+    animation-delay: 1.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.tool{
+    position: absolute;
+    bottom:30px ;
+    left: 35px;
+    opacity: 0;
+
+    animation-name: show;
+    animation-duration: 1s;
+    animation-delay: 2s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes show{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
