@@ -85,10 +85,10 @@
     //刪除bikeId重複的值 刪去latestUpdateTimestamp較小的
     function removeDuplicates(array) {
         var arr = array.concat() // 給定一個新陣列，避免改變到原陣列
-        for (var i = 0; i < arr.length; i++) {
-            // console.log("i=",arr[i]);
+        for (var i = 0; i < arr.length; i++) {   // 起始值 | 迴圈進行條件 | 迴圈完成後的處理更新 
+            // console.log(arr.length,"i=",i,arr[i]);   // 每跑一次迴圈，長度就-1，當 i = 4時，i < arr.length條件不成立，停止for迴圈
             for (var j = i + 1; j < arr.length; j++) {
-                // console.log("j=",arr[j]);
+                // console.log(arr.length,"j=",j,arr[j]);
                 if (arr[i].bikeId === arr[j].bikeId && arr[i].latestUpdateTimestamp >= arr[j].latestUpdateTimestamp) {
                     // console.log(arr[i], arr[j]);
                     // console.log(arr[i].latestUpdateTimestamp, arr[j].latestUpdateTimestamp);
