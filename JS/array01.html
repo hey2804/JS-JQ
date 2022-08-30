@@ -1,0 +1,126 @@
+<script>
+    const bikesDefinitions1 = [
+        {
+            bikeId: 1,
+            latestUpdateTimestamp: 1635216996341,
+            batteryPartNumber: 1652,
+            HMIPartNumber: 1564,
+        },
+        {
+            bikeId: 2,
+            latestUpdateTimestamp: 1635216996458,
+            batteryPartNumber: 1652,
+            HMIPartNumber: 1564,
+        },
+        {
+            bikeId: 3,
+            latestUpdateTimestamp: 1635216997458,
+            batteryPartNumber: 1652,
+            HMIPartNumber: 1564,
+        },
+    ];
+
+    const bikesDefinitions2 = [
+        {
+            bikeId: 1,
+            latestUpdateTimestamp: 1635216996460,
+            batteryPartNumber: 1670,
+            HMIPartNumber: 1564,
+        },
+        {
+            bikeId: 3,
+            latestUpdateTimestamp: 1635216997320,
+            batteryPartNumber: 1200,
+            HMIPartNumber: 1385,
+        },
+        {
+            bikeId: 5,
+            latestUpdateTimestamp: 1635216996341,
+            batteryPartNumber: 1652,
+            HMIPartNumber: 1564,
+        },
+    ];
+
+    const bikesDefinitions3 = [
+        {
+            bikeId: 2,
+            latestUpdateTimestamp: 1635216999999,
+            batteryPartNumber: 1956,
+            HMIPartNumber: 1564,
+        },
+        {
+            bikeId: 5,
+            latestUpdateTimestamp: 1635216996341,
+            batteryPartNumber: 1652,
+            HMIPartNumber: 1564,
+        },
+        {
+            bikeId: 6,
+            latestUpdateTimestamp: 1635216999856,
+            batteryPartNumber: 1652,
+            HMIPartNumber: 1246,
+        },
+    ];
+    /**
+        Here you have 3 arrays of objects, each object represents a bike with the parts installed, and the timestamp when this record was saved in the database..
+        the bikeId property is unique to a bike. That means that if two objects have the same bikeId, it is the same bike.
+        */
+
+    // 1. print an array that contains all latest bike definitions, (no duplicates for bikeId), make sure that the list only includes the latest bike definitions for each bikeId (only include the highest timestamp)
+
+    // 合併3個array
+    let arrayBikes;
+    arrayBikes = [...bikesDefinitions1, ...bikesDefinitions2, ...bikesDefinitions3];
+
+    // 升序排列 依照bikeId
+    arrayBikes.sort(function (a, b) {
+        if (a.bikeId > b.bikeId) {
+            return 1; // 正數時，後面的數放在前面，a.bikeId > b.bikeId時(true)，b 排在 a 前面
+        } else {
+            return -1; // 負數時，前面的數放在前面， a.bikeId < b.bikeId時(false)，a 排在 b 前面
+        }
+    });
+    console.log("Merged + Sort :", arrayBikes);
+
+    //刪除bikeId重複的值 刪去latestUpdateTimestamp較小的
+    function removeDuplicates(array) {
+        var arr = array.concat() // 給定一個新陣列，避免改變到原陣列
+        for (var i = 0; i < arr.length; i++) {
+            // console.log("i=",arr[i]);
+            for (var j = i + 1; j < arr.length; j++) {
+                // console.log("j=",arr[j]);
+                if (arr[i].bikeId === arr[j].bikeId && arr[i].latestUpdateTimestamp >= arr[j].latestUpdateTimestamp) {
+                    // console.log(arr[i], arr[j]);
+                    // console.log(arr[i].latestUpdateTimestamp, arr[j].latestUpdateTimestamp);
+                    arr.splice(j, 1); // 移除整個j項(重複的)
+                }else if(arr[i].bikeId === arr[j].bikeId && arr[i].latestUpdateTimestamp < arr[j].latestUpdateTimestamp){
+                    // console.log(arr[i], arr[j]);
+                    // console.log(arr[i].latestUpdateTimestamp, arr[j].latestUpdateTimestamp);
+                    arr.splice(i, 1);
+                }
+            }
+        }
+        return arr;
+    }
+    console.log(removeDuplicates(arrayBikes));
+
+// 2. sort the array by most recent
+
+// 3. make it a function that accepts an undefined number of bikes as parameters
+
+// concat():
+// 使用concat()時，如果沒有給參數，就相當是原陣列與一個空陣列拼接，返回的原陣列，就算是原陣列的深拷貝。
+
+
+// indexOf():
+// str.indexOf(searchValue [, fromIndex])
+
+// indexOf 方法接受兩個參數，第一個參數為欲搜尋的字串，第二個參數為開始查找的位置，默認值為 0。
+// 若查找到符合的字串，則回傳匹配字串第一個字的索引值，
+// 若查找不到，則回覆 -1。
+
+// let str = "dajop Dsjapfmpe  NfioweincUe dniOeImc";
+// str.indexOf("fmpe");  // 回傳11
+// str.indexOf("ldaspojpoe"); // 回傳-1
+
+</script>
